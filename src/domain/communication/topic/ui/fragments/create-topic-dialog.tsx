@@ -9,7 +9,8 @@ import { toast } from 'sonner'
 import { useShallow } from 'zustand/react/shallow'
 import { createTopicDto } from '../../dtos'
 import { useTopicStore } from '../../store'
-import type { CreateTopicDto } from '../../utils/types'
+import type { CreateTopicDto, TopicVisibility } from '../../utils/types'
+import { TopicVisibilitySelect } from './topic-visibility-select'
 
 type CreateTopicDialogProps = { children: React.ReactNode }
 
@@ -18,11 +19,12 @@ export const CreateTopicDialog = ({ children }: CreateTopicDialogProps) => {
 
   const [open, setOpen] = useState(false)
   const [name, setName] = useState('')
+  const [visibility, setVisibility] = useState<TopicVisibility>('private')
 
   const [creating, setCreating] = useState(false)
 
   const handleSubmit = async () => {
-    const body: CreateTopicDto = { name: name.trim() }
+    const body: CreateTopicDto = { name: name.trim(), visibility }
 
     if (!createTopicDto.shape.name.safeParse(body.name).success) {
       toast('Invalid name', { description: "Name shouldn't be empty" })
@@ -68,15 +70,21 @@ export const CreateTopicDialog = ({ children }: CreateTopicDialogProps) => {
             />
           </div>
           <DialogFooter>
-            <DialogClose asChild>
-              <Button
-                type='button'
-                variant='outline'
-              >
-                Cancel
-              </Button>
-            </DialogClose>
-            <LoadingButton loading={creating}>Create</LoadingButton>
+            <TopicVisibilitySelect
+              value={visibility}
+              onValueChange={setVisibility}
+            />
+            <div className='flex gap-x-2'>
+              <DialogClose asChild>
+                <Button
+                  type='button'
+                  variant='outline'
+                >
+                  Cancel
+                </Button>
+              </DialogClose>
+              <LoadingButton loading={creating}>Create</LoadingButton>
+            </div>
           </DialogFooter>
         </Form>
       </DialogContent>

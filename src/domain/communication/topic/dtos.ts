@@ -1,10 +1,13 @@
 import { userSchema } from '@/domain/identity/user/utils/schemas'
 import z from 'zod'
-import { augmentedTopicSchema } from './utils/schemas'
+import { augmentedTopicSchema, topicVisibilitySchema } from './utils/schemas'
 
 export const getTopicsResponseDto = z.object({ topics: augmentedTopicSchema.array() })
 
-export const createTopicDto = z.object({ name: z.string().trim().min(1) })
+export const createTopicDto = z.object({
+  name: z.string().trim().min(1),
+  visibility: topicVisibilitySchema
+})
 
 export const createTopicResponseDto = z.object({ topic: augmentedTopicSchema })
 
