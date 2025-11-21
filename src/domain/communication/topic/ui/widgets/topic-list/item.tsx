@@ -7,28 +7,27 @@ import type { AugmentedTopic } from '../../../utils/types'
 type TopicProps = { topic: AugmentedTopic; active: boolean }
 
 export const TopicListItem = ({ topic, active }: TopicProps) => (
-  <div>
-    <button
+  <div className='screen-width'>
+    <Button
+      variant='ghost'
       data-active={active}
       onClick={() => joinTopic({ topicId: topic.id })}
-      className='screen-width ghost-button flex-col'
+      className='p-ghost-button! w-full justify-between'
     >
-      <div className='flex h-6 w-full items-center justify-between'>
-        <span className='font-bold'>{topic.name}</span>
-        <div className='flex -space-x-2'>
-          {topic.users.map((user) => (
-            <Avatar
-              key={user.id}
-              className='size-7 border'
-            >
-              <AvatarFallback>
-                <UserIcon className='text-muted-foreground size-4' />
-              </AvatarFallback>
-            </Avatar>
-          ))}
-        </div>
+      <span>{topic.name}</span>
+      <div className='flex -space-x-2'>
+        {topic.users.map((user) => (
+          <Avatar
+            key={user.id}
+            className='size-7 border'
+          >
+            <AvatarFallback>
+              <UserIcon className='text-muted-foreground size-4' />
+            </AvatarFallback>
+          </Avatar>
+        ))}
       </div>
-    </button>
+    </Button>
     {active && (
       <div className='screen-width'>
         <Button

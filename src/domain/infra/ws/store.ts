@@ -42,5 +42,5 @@ export const useWebSocketStore = create<WebSocketState>()((set, get) => ({
 
     ws.onclose = () => set({ ws: null })
   },
-  disconnect: () => get().ws?.close()
+  disconnect: () => get().ws?.close?.()
 }))

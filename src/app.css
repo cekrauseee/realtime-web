@@ -4,6 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --spacing-ghost-button: 3.5rem;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -122,10 +123,6 @@
 }
 
 @layer components {
-  .ghost-button {
-    @apply focus-visible:bg-accent! data-[active=true]:bg-accent/50 hover:bg-accent! flex w-full cursor-pointer items-center gap-x-2 border-t p-12 text-start text-sm outline-0 transition-colors data-[size=sm]:p-6 [&_svg:not([class*='size-'])]:size-4;
-  }
-
   .inline-button {
     @apply text-sm underline-offset-4 outline-0 hover:underline focus-visible:underline;
   }
