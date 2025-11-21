@@ -123,7 +123,7 @@
 
 @layer components {
   .ghost-button {
-    @apply focus-visible:bg-accent! data-[active=true]:bg-accent/50 hover:bg-accent! flex w-full cursor-pointer items-center gap-x-2 border-t p-12 text-start text-sm outline-0 transition-colors [&_svg:not([class*='size-'])]:size-4;
+    @apply focus-visible:bg-accent! data-[active=true]:bg-accent/50 hover:bg-accent! flex w-full cursor-pointer items-center gap-x-2 border-t p-12 text-start text-sm outline-0 transition-colors data-[size=sm]:p-6 [&_svg:not([class*='size-'])]:size-4;
   }
 
   .inline-button {

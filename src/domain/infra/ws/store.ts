@@ -29,7 +29,9 @@ export const useWebSocketStore = create<WebSocketState>()((set, get) => ({
           .safeParse(JSON.parse(event.data as string))
 
         if (!parse.success) return
+
         const payload = parse.data
+        console.log(payload)
 
         const declaration = WEBSOCKET_EVENTS_DECLARATION[payload.event]
         await declaration.listener(payload.data)

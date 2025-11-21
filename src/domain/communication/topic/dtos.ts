@@ -15,6 +15,8 @@ export const joinTopicDto = z.object({ topicId: z.cuid2() })
 
 export type JoinTopicDto = z.infer<typeof joinTopicDto>
 
+export type LeaveTopicDto = { topicId: string }
+
 export const topicUserAppendDto = z.object({
   user: userSchema,
   topicId: z.cuid2()

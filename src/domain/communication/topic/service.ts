@@ -1,6 +1,6 @@
 import { api } from '@/domain/infra/api'
 import { useWebSocketStore } from '@/domain/infra/ws/store'
-import { createTopicResponseDto, getTopicsResponseDto, type JoinTopicDto } from './dtos'
+import { createTopicResponseDto, getTopicsResponseDto, type JoinTopicDto, type LeaveTopicDto } from './dtos'
 import type { AugmentedTopic, CreateTopicDto } from './utils/types'
 
 export const getTopics = async (): Promise<AugmentedTopic[]> => {
@@ -15,7 +15,12 @@ export const createTopic = async (body: CreateTopicDto): Promise<AugmentedTopic>
   return createTopicResponseDto.parse(data).topic
 }
 
-export const joinTopic = async (body: JoinTopicDto) => {
+export const joinTopic = (body: JoinTopicDto) => {
   const ws = useWebSocketStore.getState().ws
   if (ws) ws.send('topic:join', body)
+}
+
+export const leaveTopic = (body: LeaveTopicDto) => {
+  const ws = useWebSocketStore.getState().ws
+  if (ws) ws.send('topic:leave', body)
 }
