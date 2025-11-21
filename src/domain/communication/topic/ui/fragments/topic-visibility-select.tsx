@@ -14,7 +14,7 @@ export const TopicVisibilitySelect = (props: TopicVisibilitySelectProps) => (
         <LockIcon />
         <span>Private</span>
       </SelectItem>
-      <SelectItem value='Public'>
+      <SelectItem value='public'>
         <GlobeIcon />
         <span>Public</span>
       </SelectItem>
