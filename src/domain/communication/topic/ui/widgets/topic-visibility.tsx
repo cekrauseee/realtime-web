@@ -4,7 +4,7 @@ import { useShallow } from 'zustand/react/shallow'
 import { useTopicStore } from '../../store'
 import { topicVisibilitySchema } from '../../utils/schemas'
 
-export const TopicSection = () => {
+export const TopicVisibility = () => {
   const search = new URLSearchParams(useLocation().search)
   const viewing = topicVisibilitySchema.safeParse(search.get('v')).data ?? 'private'
 
