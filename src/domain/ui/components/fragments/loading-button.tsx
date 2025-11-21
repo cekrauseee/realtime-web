@@ -1,8 +1,7 @@
 import { Button } from '../../cn/components/button'
 import { Spinner } from '../../cn/components/spinner'
-import type { ButtonProps } from './button'
 
-type LoadingButtonProps = { loading?: boolean } & ButtonProps
+type LoadingButtonProps = { loading?: boolean } & React.ComponentProps<typeof Button>
 
 export const LoadingButton = ({ children, disabled, loading, ...props }: LoadingButtonProps) => (
   <Button

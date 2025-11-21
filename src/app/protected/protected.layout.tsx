@@ -8,7 +8,7 @@ export const ProtectedLayout = () => (
       <div className='flex min-h-0 flex-1 flex-col'>
         <Outlet />
       </div>
-      <footer className='mx-auto w-full max-w-lg'>
+      <footer className='screen-width'>
         <SignOutButton />
       </footer>
     </div>

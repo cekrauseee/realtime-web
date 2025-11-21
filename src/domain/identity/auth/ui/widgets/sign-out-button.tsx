@@ -1,4 +1,3 @@
-import { Button } from '@/domain/ui/components/fragments/button'
 import { LogOutIcon } from 'lucide-react'
 import { useNavigate } from 'react-router'
 import { signOut } from '../../service'
@@ -7,14 +6,15 @@ export const SignOutButton = () => {
   const navigate = useNavigate()
 
   return (
-    <Button
+    <button
       onClick={async () => {
         await signOut()
         navigate('/sign-in')
       }}
+      className='ghost-button'
     >
-      <LogOutIcon className='size-4' />
+      <LogOutIcon />
       <span>Sign out</span>
-    </Button>
+    </button>
   )
 }

@@ -2,7 +2,7 @@ import type { User } from '@/domain/identity/user/utils/types'
 import { enableMapSet, produce } from 'immer'
 import { create } from 'zustand'
 import { createTopic, getTopics } from './service'
-import type { AugmentedTopic, CreateTopicDto } from './utils/types'
+import type { AugmentedTopic, CreateTopicDto, TopicVisibility } from './utils/types'
 
 type TopicState = {
   topics: Map<string, AugmentedTopic>
@@ -10,6 +10,8 @@ type TopicState = {
   createTopic: (body: CreateTopicDto) => Promise<void>
   appendTopicUser: (user: User, topicId: string) => void
   removeTopicUser: (userId: string, topicId: string) => void
+  viewing: TopicVisibility
+  setVisibility: (visibility: TopicVisibility) => void
 }
 
 enableMapSet()
@@ -42,5 +44,7 @@ export const useTopicStore = create<TopicState>()((set) => ({
         const topic = state.topics.get(topicId)
         if (topic) state.topics.set(topic.id, { ...topic, users: topic.users.filter((user) => user.id !== userId) })
       })
-    )
+    ),
+  viewing: 'private',
+  setVisibility: (visibility) => set({ viewing: visibility })
 }))

@@ -1,28 +1,21 @@
-import { useTopicStore } from '@/domain/communication/topic/store'
 import { CreateTopicDialog } from '@/domain/communication/topic/ui/fragments/create-topic-dialog'
-import { Topic } from '@/domain/communication/topic/ui/widgets/topic'
-import { Button } from '@/domain/ui/components/fragments/button'
+import { TopicList } from '@/domain/communication/topic/ui/widgets/topic-list'
+import { TopicSection } from '@/domain/communication/topic/ui/widgets/topic-section'
 import { PlusIcon } from 'lucide-react'
-import { useShallow } from 'zustand/react/shallow'
 
-export const ProtectedPage = () => {
-  const topics = useTopicStore(useShallow((state) => state.topics))
-
-  return (
+export const ProtectedPage = () => (
+  <>
+    <header className='screen-width'>
+      <TopicSection />
+    </header>
     <main className='flex flex-1 flex-col overflow-hidden'>
-      <ul className='overflow-y-auto'>
-        {Array.from(topics.values()).map((topic) => (
-          <li key={topic.id}>
-            <Topic topic={topic} />
-          </li>
-        ))}
-        <CreateTopicDialog>
-          <Button className='mx-auto w-full max-w-lg'>
-            <PlusIcon className='size-4' />
-            <span>New topic</span>
-          </Button>
-        </CreateTopicDialog>
-      </ul>
+      <TopicList />
+      <CreateTopicDialog>
+        <button className='screen-width ghost-button'>
+          <PlusIcon />
+          <span>New topic</span>
+        </button>
+      </CreateTopicDialog>
     </main>
-  )
-}
+  </>
+)

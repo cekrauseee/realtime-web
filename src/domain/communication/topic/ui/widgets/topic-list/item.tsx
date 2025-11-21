@@ -1,16 +1,14 @@
 import { Avatar, AvatarFallback } from '@/domain/ui/cn/components/avatar'
-import { cn } from '@/domain/ui/cn/utils/helpers'
-import { Button } from '@/domain/ui/components/fragments/button'
 import { UserIcon } from 'lucide-react'
-import { joinTopic } from '../../service'
-import type { AugmentedTopic } from '../../utils/types'
+import { joinTopic } from '../../../service'
+import type { AugmentedTopic } from '../../../utils/types'
 
 type TopicProps = { topic: AugmentedTopic }
 
-export const Topic = ({ topic }: TopicProps) => (
-  <Button
+export const TopicListItem = ({ topic }: TopicProps) => (
+  <button
     onClick={() => joinTopic({ topicId: topic.id })}
-    className={cn('mx-auto w-full max-w-lg justify-between')}
+    className='screen-width ghost-button justify-between'
   >
     <div className='flex h-6 w-full items-center justify-between'>
       <span className='font-bold'>{topic.name}</span>
@@ -27,5 +25,5 @@ export const Topic = ({ topic }: TopicProps) => (
         ))}
       </div>
     </div>
-  </Button>
+  </button>
 )
