@@ -1,5 +1,5 @@
 import { signInDto, type SignInDto } from '@/domain/identity/auth/dtos'
-import { signIn } from '@/domain/identity/auth/service'
+import { useSessionStore } from '@/domain/identity/auth/store'
 import { Label } from '@/domain/ui/cn/components/label'
 import { Form } from '@/domain/ui/components/fragments/form'
 import { Input } from '@/domain/ui/components/fragments/input'
@@ -8,9 +8,11 @@ import { SecretInput } from '@/domain/ui/components/fragments/secret-input'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { toast } from 'sonner'
+import { useShallow } from 'zustand/react/shallow'
 
 export const SignInPage = () => {
   const navigate = useNavigate()
+  const signIn = useSessionStore(useShallow((state) => state.signIn))
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')

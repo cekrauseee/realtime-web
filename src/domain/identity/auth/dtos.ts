@@ -10,6 +10,8 @@ export const signInDto = z.object({
 
 export type SignInDto = z.infer<typeof signInDto>
 
+export const signInResponseDto = z.object({ session: sessionSchema })
+
 export const signUpDto = z.object({
   email: z.email(),
   username: z.string().trim().min(1),
@@ -17,3 +19,5 @@ export const signUpDto = z.object({
 })
 
 export type SignUpDto = z.infer<typeof signUpDto>
+
+export const signUpResponseDto = z.object({ session: sessionSchema })

@@ -1,5 +1,5 @@
 import { api } from '@/domain/infra/api'
-import { getSessionResponseDto, type SignInDto, type SignUpDto } from './dtos'
+import { getSessionResponseDto, signInResponseDto, signUpResponseDto, type SignInDto, type SignUpDto } from './dtos'
 import type { Session } from './utils/types'
 
 export const getSession = async (): Promise<Session | null> => {
@@ -16,8 +16,16 @@ export const getSession = async (): Promise<Session | null> => {
   }
 }
 
-export const signIn = (body: SignInDto) => api.post('auth/sign-in', body)
+export const signIn = async (body: SignInDto): Promise<Session> => {
+  const res = await api.post('auth/sign-in', body)
+  const data = await res.json()
+  return signInResponseDto.parse(data).session
+}
 
-export const signUp = async (body: SignUpDto) => api.post('auth/sign-up', body)
+export const signUp = async (body: SignUpDto): Promise<Session> => {
+  const res = await api.post('auth/sign-up', body)
+  const data = await res.json()
+  return signUpResponseDto.parse(data).session
+}
 
 export const signOut = async () => api.delete('auth/session')

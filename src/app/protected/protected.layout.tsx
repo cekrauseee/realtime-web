@@ -3,9 +3,10 @@ import { SignOutButton } from '@/domain/identity/auth/ui/widgets/sign-out-button
 import { Fallback } from '@/domain/ui/components/widgets/fallback'
 import { State } from '@/domain/ui/components/widgets/state'
 import { Outlet } from 'react-router'
+import { useShallow } from 'zustand/react/shallow'
 
 export const ProtectedLayout = () => {
-  const session = useSessionStore((state) => state.session)
+  const session = useSessionStore(useShallow((state) => state.session))
   if (!session) return <Fallback />
 
   return (
