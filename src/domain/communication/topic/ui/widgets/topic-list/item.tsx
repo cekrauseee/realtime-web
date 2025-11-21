@@ -11,7 +11,10 @@ export const TopicListItem = ({ topic, active }: TopicProps) => (
     <Button
       variant='ghost'
       data-active={active}
-      onClick={() => joinTopic({ topicId: topic.id })}
+      onClick={() => {
+        if (active) return
+        joinTopic({ topicId: topic.id })
+      }}
       className='p-ghost-button! w-full justify-between'
     >
       <span>{topic.name}</span>
