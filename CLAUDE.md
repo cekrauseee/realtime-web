@@ -5,6 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 **Development**
+
 ```bash
 bun dev              # Start dev server on port 3000
 bun build            # Type check and build for production
@@ -12,6 +13,7 @@ bun preview          # Preview production build
 ```
 
 **Code Quality**
+
 ```bash
 bun lint             # Run ESLint
 bun check-types      # Run TypeScript type checking
@@ -39,6 +41,7 @@ The codebase follows a domain-driven architecture under `src/domain/`:
   - `components/` - Custom UI fragments and widgets
 
 Each domain follows a consistent structure:
+
 - `store.ts` - Zustand state management
 - `service.ts` - API/business logic
 - `listener.ts` - WebSocket event handlers
@@ -49,6 +52,7 @@ Each domain follows a consistent structure:
 **State Management**
 
 Uses Zustand stores:
+
 - `useSessionStore` - Authentication session state (src/domain/identity/auth/store.ts)
 - `useWebSocketStore` - WebSocket connection lifecycle (src/domain/infra/ws/store.ts)
 - `useTopicStore` - Topic data with Immer for immutable Map updates (src/domain/communication/topic/store.ts)
@@ -56,12 +60,14 @@ Uses Zustand stores:
 **WebSocket Event System**
 
 Centralized event handling in `src/domain/infra/ws/store.ts`:
+
 1. Events are parsed and validated with Zod schemas
 2. Dispatched to domain-specific listeners via `WEBSOCKET_EVENTS_DECLARATION`
 3. Domains register their events in `utils/constants.ts` (e.g., `TOPIC_EVENTS_DECLARATION`)
 4. Listeners update Zustand stores based on event data
 
 To add new WebSocket events:
+
 1. Define event type in domain's `utils/types.ts`
 2. Create listener function in domain's `listener.ts`
 3. Register in domain's `utils/constants.ts` event declaration
@@ -70,6 +76,7 @@ To add new WebSocket events:
 **Routing & Auth**
 
 React Router 7 with nested layouts in `src/app/router.tsx`:
+
 - `<Auth />` wrapper handles session checking
 - `<PublicLayout />` for unauthenticated routes (/sign-in, /sign-up)
 - `<ProtectedLayout />` for authenticated routes (/)
